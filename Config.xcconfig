@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  SearchBook
+//
+//  Created by 쌩 on 5/2/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+CLIENT_ID = d4FjoSOQyLMx31ywdpJ0
+CLIENT_SECRET = 5vpcSEXymo
