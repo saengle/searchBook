@@ -43,13 +43,13 @@ class BookApi {
     }
     
     
-    let url = "https://openapi.naver.com/v1/search/book.json"
+    let baseUrl = "https://openapi.naver.com/v1/search/book.json"
     
     
     func fetchBookDataUrlSession(query: String, completion: @escaping ((Result<[Item], Error> ) -> Void)) {
         let queryItems: [URLQueryItem] = [URLQueryItem(name: "query", value: String(query.utf8)), URLQueryItem(name: "display", value: "10"), URLQueryItem(name: "start", value: "1"), URLQueryItem(name: "sort", value: "sim")]
         
-        guard let url = URL(string: "\(url)") else {
+        guard let url = URL(string: "\(baseUrl)") else {
             completion(.failure(NSError(domain: "Url변환에 실패했습니다.", code: 444)))
             return
         }
@@ -84,11 +84,37 @@ class BookApi {
         task.resume()
     }
     
-    
-    
-    
-    
-    
-    
+    func fetchDataAlamofire(query: String, page: Int, completion: @escaping((Result<[Item], Error>) -> Void)) {
+        // Mark:  query를 파라미터 타입의 딕셔너리에 담음
+        let parameters = [
+            "query" : "\(query.utf8)",
+            "display" : "10",
+            "start": "\(page)",
+            "sort": "sim"
+        ]
+        
+        let headers: HTTPHeaders = [
+            "X-Naver-Client-Id": "\(apiID)",
+            "X-Naver-Client-Secret": "\(apiSecret)"]
+        // Mark:파라미터에 쿼리를 담고(파라미터 형식의 딕셔너리에 담은)
+        // encoding을 JSONEncoding.default로 함
+        /* 
+         * 딕셔너리 형태는 URL뒤에 붙지도 않고, json 형식도 아니다. 따라서 따로 encoding을 해줘야한다.
+         * 쿼리 파라미터는 URL 뒤에 붙는다. 따라서 URLEncoding.default이다.
+         * Body에 담는 데이터의 타입은 JSON이다. 따라서 Body에 데이터를 담으려면 JSONEncoding.default로 해줘야한다.
+         */
+        
+        AF.request(self.baseUrl, method: .get, parameters: parameters ,encoding: URLEncoding.default, headers: headers).responseDecodable(of: Books.self) { response in
+            switch response.result {
+            case .success(let repositories):
+                completion(.success(repositories.items))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+            
+        }
+        
+    }
 }
 

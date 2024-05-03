@@ -13,14 +13,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        bookApi.fetchBookDataUrlSession(query: "개발") { result in
-            switch result {
-            case .success(let bookDetails):
-                print(bookDetails)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+//        bookApi.fetchBookDataUrlSession(query: "개발") { result in
+//            switch result {
+//            case .success(let bookDetails):
+//                print(bookDetails)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+        
+        bookApi.fetchDataAlamofire(query: "창작", page: 1) {result in
+                        switch result {
+                        case .success(let bookDetails):
+                            print(bookDetails)
+                        case .failure(let error):
+                            print(error.localizedDescription)
             
+            
+        }
         }
     }
 }

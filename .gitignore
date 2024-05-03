@@ -72,3 +72,4 @@ Key.plist
 
 # Api key Secure
 *.xcconfig
+.DS_Store
