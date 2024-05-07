@@ -96,6 +96,7 @@ class BookApi {
         let headers: HTTPHeaders = [
             "X-Naver-Client-Id": "\(apiID)",
             "X-Naver-Client-Secret": "\(apiSecret)"]
+        
         // Mark:파라미터에 쿼리를 담고(파라미터 형식의 딕셔너리에 담은)
         // encoding을 JSONEncoding.default로 함
         /* 
