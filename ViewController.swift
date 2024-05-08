@@ -11,7 +11,7 @@ class ViewController: UITabBarController {
     
 
     let bookApi = BookApi()
-    var bookDetails = [Item]()
+    var bookDetails = [Book]()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

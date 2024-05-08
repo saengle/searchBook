@@ -46,7 +46,7 @@ class BookApi {
     let baseUrl = "https://openapi.naver.com/v1/search/book.json"
     
     
-    func fetchBookDataUrlSession(query: String, completion: @escaping ((Result<[Item], Error> ) -> Void)) {
+    func fetchBookDataUrlSession(query: String, completion: @escaping ((Result<[Book], Error> ) -> Void)) {
         let queryItems: [URLQueryItem] = [URLQueryItem(name: "query", value: String(query.utf8)), URLQueryItem(name: "display", value: "10"), URLQueryItem(name: "start", value: "1"), URLQueryItem(name: "sort", value: "sim")]
         
         guard let url = URL(string: "\(baseUrl)") else {
@@ -84,7 +84,7 @@ class BookApi {
         task.resume()
     }
     
-    func fetchDataAlamofire(query: String, page: Int, completion: @escaping((Result<[Item], Error>) -> Void)) {
+    func fetchDataAlamofire(query: String, page: Int, completion: @escaping((Result<[Book], Error>) -> Void)) {
         // Mark:  query를 파라미터 타입의 딕셔너리에 담음
         let parameters = [
             "query" : "\(query.utf8)",

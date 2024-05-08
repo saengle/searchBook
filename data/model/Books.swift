@@ -9,11 +9,11 @@ import Foundation
 struct Books: Codable {
     let lastBuildDate: String
     let total, start, display: Int
-    let items: [Item]
+    let items: [Book]
 }
 
 // MARK: - Item
-struct Item: Codable {
+struct Book: Codable {
     let title: String
     let link: String
     let image: String
